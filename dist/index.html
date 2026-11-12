@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <header><a class="brand" href="./"><img src="archer.png" alt="Archer logo" class="brand-logo"
-     width="56" height="49"
-     style="display:block; width:56px; height:49px; object-fit:contain; flex-shrink:0;"> FLIGHT CLUB<span class="tag">THE ARCHERY
-                RANGE</span></a>
+    <header><a class="brand" href="./">
+            <img src="archer.png" alt="Archer logo" class="brand-logo" width="56" height="49"
+                style="display:block; width:56px; height:49px; object-fit:contain; flex-shrink:0;">
+            FLIGHT CLUB
+            <span class="tag">THE ARCHERY RANGE</span>
+        </a>
         <div class="live"><i></i> RANGE OPEN <span>EST. 2026</span></div><button id="sound" aria-label="Toggle sound"
             aria-pressed="true">SOUND ON ♫</button>
     </header>
@@ -71,7 +73,7 @@
                     class="toggle"><input id="preview" type="checkbox"> SHOW FLIGHT PREVIEW</label><button id="reset">↻
                     NEW ROUND</button>
             </div>
-            <div class="guide"><span>01 <b>HOLD</b> to draw</span><span>02 <b>MOVE</b> to aim</span><span>03
+            <div class="guide"><span>01 <b>HOLD</b> to draw</span><span>02 <b>DRAG</b> to aim</span><span>03
                     <b>RELEASE</b> to let fly</span></div>
         </section>
         <footer><button
@@ -82,12 +84,13 @@
                 ring earns that score.</p>
             <p>Gold-center shots earn a 1.5× bonus. Perfect X earns 5 extra points. Splitting a landed shaft earns the
                 Robin Hood callout. Your base score stays out of 60; bonuses appear on the scorecard.</p>
-            <p>Hold to draw. Move your pointer to aim. On touch, drag to aim and release. Full draw held too long
-                introduces sway. With assist on, arrow drop is compensated at your current draw power. Wind always
-                pushes your arrow sideways: aim into the wind. Leaves travel downwind. The reticle is your aim point.
-                Flight preview is optional and off by default; wind drift is reported after each shot. Turn assist off
-                to compensate for elevation yourself too. Press T to toggle it, R for a new round, or use Space to draw
-                and release.</p>
+            <p>Hold to draw. Move your mouse to aim. On mobile, hold anywhere on the game view and slide to move the
+                crosshair relative to its current position, like a trackpad. Your finger can stay away from the target.
+                Lift to shoot. Full draw held too long introduces sway. With assist on, arrow drop is compensated at
+                your current draw power. Wind always pushes your arrow sideways: aim into the wind. Leaves travel
+                downwind. The reticle is your aim point. Flight preview is optional and off by default; wind drift is
+                reported after each shot. Turn assist off to compensate for elevation yourself too. Press T to toggle
+                it, R for a new round, or use Space to draw and release.</p>
         </dialog>
     </main>
     <script type="module" src="game.js"></script>
