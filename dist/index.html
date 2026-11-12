@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Flight Club — The Archery Range</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header><a class="brand" href="./"><img src="archer.png" alt="Archer logo" class="brand-logo"
+     width="56" height="49"
+     style="display:block; width:56px; height:49px; object-fit:contain; flex-shrink:0;"> FLIGHT CLUB<span class="tag">THE ARCHERY
+                RANGE</span></a>
+        <div class="live"><i></i> RANGE OPEN <span>EST. 2026</span></div><button id="sound" aria-label="Toggle sound"
+            aria-pressed="true">SOUND ON ♫</button>
+    </header>
+    <main>
+        <section class="intro">
+            <div>
+                <p class="eyebrow">PRECISION IS A PRACTICE</p>
+                <h1>Find your <em>focus.</em></h1>
+            </div>
+            <p class="introtext">A quiet mind. A steady hand. One perfect shot.<br>Step onto the line and make every
+                arrow count.</p>
+        </section>
+        <section class="range">
+            <div class="rangehead"><span><i></i> FREE PRACTICE <b> / </b> THE PINEWOOD RANGE</span><span
+                    id="roundLabel">ROUND 01 <b> • </b> 6 ARROWS</span></div>
+            <div class="scene"><canvas id="game"
+                    aria-label="Archery range. Hold to draw, aim with pointer, release to shoot."></canvas>
+                <div class="scene-top"><span>↗ <b id="distanceLabel">30</b> <small>METERS</small></span><span
+                        id="windLabel">→ 1.2 m/s <small>CROSSWIND</small></span></div>
+                <div class="callout" id="callout"><small>WELCOME TO THE LINE</small><strong>Make your first
+                        mark.</strong></div>
+                <div id="cine" hidden>◎ BULLSEYE CAM <span>0.25×</span></div>
+                <div id="windResult" hidden aria-live="polite"></div>
+                <div class="scene-bottom"><span id="status">HOLD TO DRAW · RELEASE TO SHOOT</span>
+                    <div class="power"><span><span id="drawTitle">DRAW POWER</span> <b id="powerLabel">0%</b></span>
+                        <div><i id="powerBar"></i></div>
+                    </div>
+                </div>
+                <div id="summary" hidden>
+                    <p class="eyebrow">ROUND COMPLETE</p>
+                    <h2 id="summaryTitle"></h2><canvas id="group" width="180" height="180"></canvas>
+                    <p id="summaryText"></p><button id="again">BACK TO THE LINE ↗</button>
+                </div>
+            </div>
+            <div class="stats">
+                <div><small>ROUND SCORE</small><strong id="score">00</strong><span>/ 60 possible</span></div>
+                <div><small>PERSONAL BEST</small><strong id="best">00</strong><span>your high-water mark</span></div>
+                <div><small>QUIVER</small><strong id="quiver">↟ ↟ ↟ ↟ ↟ ↟</strong><span id="remaining">6 arrows
+                        remaining</span></div>
+                <div><small>STREAK</small><strong id="combo">—</strong><span>consecutive 9+ shots</span></div>
+            </div>
+        </section>
+        <section class="bottom">
+            <div class="controls"><span class="eyebrow">MAKE IT YOUR RANGE</span>
+                <fieldset id="distance">
+                    <legend>DISTANCE</legend>
+                    <div class="distance-options" aria-label="Target distance"><button type="button" data-distance="10"
+                            aria-pressed="false">10m</button><button type="button" data-distance="20"
+                            aria-pressed="false">20m</button><button type="button" data-distance="30"
+                            aria-pressed="true">30m</button><button type="button" data-distance="50"
+                            aria-pressed="false">50m</button><button type="button" data-distance="70"
+                            aria-pressed="false">70m</button><button type="button" data-distance="90"
+                            aria-pressed="false">90m</button></div><small>Changing distance starts a fresh round. Longer
+                        shots need more draw.</small>
+                </fieldset><label class="toggle"><input id="assist" type="checkbox" checked> DROP ASSIST</label><label
+                    class="toggle"><input id="preview" type="checkbox"> SHOW FLIGHT PREVIEW</label><button id="reset">↻
+                    NEW ROUND</button>
+            </div>
+            <div class="guide"><span>01 <b>HOLD</b> to draw</span><span>02 <b>MOVE</b> to aim</span><span>03
+                    <b>RELEASE</b> to let fly</span></div>
+        </section>
+        <footer><button
+                id="help">HOW SCORING WORKS ↗</button></footer>
+        <dialog id="rules"><button id="close">✕</button>
+            <h2>Every millimeter matters.</h2>
+            <p>Ten rings, 1–10 points. Gold is 9–10, red 7–8, blue 5–6, black 3–4, white 1–2. An arrow touching a higher
+                ring earns that score.</p>
+            <p>Gold-center shots earn a 1.5× bonus. Perfect X earns 5 extra points. Splitting a landed shaft earns the
+                Robin Hood callout. Your base score stays out of 60; bonuses appear on the scorecard.</p>
+            <p>Hold to draw. Move your pointer to aim. On touch, drag to aim and release. Full draw held too long
+                introduces sway. With assist on, arrow drop is compensated at your current draw power. Wind always
+                pushes your arrow sideways: aim into the wind. Leaves travel downwind. The reticle is your aim point.
+                Flight preview is optional and off by default; wind drift is reported after each shot. Turn assist off
+                to compensate for elevation yourself too. Press T to toggle it, R for a new round, or use Space to draw
+                and release.</p>
+        </dialog>
+    </main>
+    <script type="module" src="game.js"></script>
+</body>
+
+</html>

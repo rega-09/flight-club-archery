@@ -1,0 +1,647 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
+
+:root {
+    --ink: #243e34;
+    --muted: #7c857a;
+    --paper: #f4f3eb;
+    --line: #dcded2;
+    --orange: #c2663c
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 13px 'DM Sans', sans-serif
+}
+
+button,
+select {
+    font: inherit;
+    color: inherit;
+    cursor: pointer
+}
+
+button {
+    background: none;
+    border: 0
+}
+
+header {
+    height: 94px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 17px
+}
+
+.mark {
+    font-size: 37px;
+    font-weight: 400
+}
+
+.tag {
+    font-size: 9px;
+    font-weight: 500;
+    border-left: 1px solid #bbc2b7;
+    padding-left: 16px;
+    letter-spacing: 1.5px
+}
+
+.live {
+    font-size: 10px;
+    letter-spacing: 1.4px
+}
+
+.live span {
+    margin-left: 24px;
+    color: var(--muted)
+}
+
+i {
+    display: inline-block
+}
+
+.live i,
+.rangehead i {
+    width: 6px;
+    height: 6px;
+    background: #698568;
+    border-radius: 50%;
+    margin-right: 8px
+}
+
+#sound {
+    font-size: 10px;
+    letter-spacing: 1px
+}
+
+main {
+    max-width: 1320px;
+    margin: auto;
+    padding: 0 48px
+}
+
+.intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 0 30px
+}
+
+.eyebrow {
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin: 0 0 11px
+}
+
+h1 {
+    font: 500 51px 'Playfair Display', Georgia, serif;
+    letter-spacing: -1.5px;
+    margin: 0
+}
+
+h1 em {
+    color: #8a977d
+}
+
+.introtext {
+    line-height: 1.9;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 29px
+}
+
+.range {
+    border: 1px solid #ccd2c4;
+    border-radius: 7px;
+    overflow: hidden;
+    background: #f9f9f3
+}
+
+.rangehead {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px 24px;
+    font-size: 9px;
+    letter-spacing: 1.4px
+}
+
+.rangehead b {
+    font-weight: 400;
+    color: #aab2a3;
+    margin: 0 13px
+}
+
+.scene {
+    height: 440px;
+    position: relative;
+    overflow: hidden;
+    background: #bdc9af
+}
+
+#game {
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none;
+    cursor: crosshair
+}
+
+.scene-top,
+.scene-bottom {
+    position: absolute;
+    left: 26px;
+    right: 26px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none
+}
+
+.scene-top {
+    top: 24px;
+    font-size: 16px
+}
+
+.scene-top small {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    margin-left: 8px
+}
+
+.scene-top b {
+    font-weight: 500
+}
+
+.scene-bottom {
+    bottom: 22px;
+    align-items: flex-end;
+    font-size: 9px;
+    letter-spacing: 1.2px
+}
+
+.power {
+    width: 180px
+}
+
+.power span {
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    margin-bottom: 8px
+}
+
+.power>div {
+    height: 3px;
+    background: #ffffff60
+}
+
+.power i {
+    height: 3px;
+    background: #384d37;
+    width: 0;
+    display: block
+}
+
+.callout {
+    position: absolute;
+    top: 80px;
+    left: 26px;
+    pointer-events: none;
+    transition: opacity .3s
+}
+
+.callout small {
+    font-size: 8px;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 8px
+}
+
+.callout strong {
+    font: 24px 'Playfair Display', Georgia, serif
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.35fr 1fr;
+    padding: 22px 0
+}
+
+.stats>div {
+    padding: 0 26px;
+    border-right: 1px solid var(--line)
+}
+
+.stats>div:last-child {
+    border: 0
+}
+
+.stats small {
+    display: block;
+    font-size: 8px;
+    letter-spacing: 1.6px;
+    color: var(--muted)
+}
+
+.stats strong {
+    font-size: 32px;
+    font-weight: 500;
+    display: block;
+    line-height: 1.6
+}
+
+.stats span {
+    font-size: 10px;
+    color: var(--muted)
+}
+
+#quiver {
+    letter-spacing: 6px;
+    font-size: 29px
+}
+
+.bottom {
+    padding-top: 26px
+}
+
+.controls {
+    display: flex;
+    gap: 27px;
+    align-items: center
+}
+
+.controls>.eyebrow {
+    margin: 0 auto 0 0
+}
+
+.controls label,
+.controls button {
+    font-size: 9px;
+    letter-spacing: 1px
+}
+
+.controls select {
+    margin-left: 10px;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid #c5cbbd;
+    padding: 8px 8px
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 7px
+}
+
+input {
+    accent-color: #486347
+}
+
+.guide {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin: 30px 0;
+    color: #899080;
+    font-size: 11px
+}
+
+.guide b {
+    color: #435343;
+    margin: 0 6px;
+    font-size: 9px;
+    letter-spacing: 1px
+}
+
+footer {
+    border-top: 1px solid var(--line);
+    padding: 21px 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: var(--muted)
+}
+
+footer button {
+    font-size: 8px;
+    letter-spacing: 1px
+}
+
+#cine {
+    position: absolute;
+    top: 24px;
+    left: 40%;
+    font-size: 10px;
+    letter-spacing: 2px
+}
+
+#cine span {
+    margin-left: 15px
+}
+
+#summary {
+    position: absolute;
+    inset: 0;
+    background: #f4f3ebee;
+    backdrop-filter: blur(7px);
+    text-align: center;
+    padding: 26px
+}
+
+#summary h2,
+dialog h2 {
+    font: 32px 'Playfair Display', Georgia, serif;
+    margin: 10px
+}
+
+#summary p {
+    color: var(--muted)
+}
+
+#summary button {
+    padding: 12px 22px;
+    background: var(--ink);
+    color: white;
+    border-radius: 3px;
+    font-size: 10px;
+    letter-spacing: 1px
+}
+
+dialog {
+    max-width: 520px;
+    padding: 32px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 8px;
+    line-height: 1.8
+}
+
+dialog::backdrop {
+    background: #20382c66
+}
+
+#close {
+    float: right
+}
+
+@media(max-width:760px) {
+    header {
+        height: 70px
+    }
+
+    .tag,
+    .live,
+    .introtext {
+        display: none
+    }
+
+    main {
+        padding: 0 16px
+    }
+
+    .intro {
+        padding: 26px 0
+    }
+
+    h1 {
+        font-size: 40px
+    }
+
+    .scene {
+        height: 440px
+    }
+
+    .stats>div {
+        padding: 0 12px
+    }
+
+    .stats strong {
+        font-size: 26px
+    }
+
+    #quiver {
+        font-size: 19px;
+        letter-spacing: 1px
+    }
+
+    .controls {
+        flex-wrap: wrap;
+        gap: 16px
+    }
+
+    .controls>.eyebrow {
+        width: 100%
+    }
+
+    .guide {
+        gap: 12px;
+        font-size: 9px
+    }
+
+    .rangehead {
+        padding: 14px;
+        font-size: 7px
+    }
+
+    .scene-top,
+    .scene-bottom {
+        left: 16px;
+        right: 16px
+    }
+
+    .callout {
+        left: 16px;
+        top: 70px
+    }
+
+    .power {
+        width: 120px
+    }
+
+    .scene-bottom {
+        font-size: 7px
+    }
+
+    .stats small {
+        font-size: 7px
+    }
+}
+
+.controls {
+    flex-wrap: wrap
+}
+
+.controls>.eyebrow {
+    min-width: 130px
+}
+
+#distance {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0
+}
+
+#distance legend {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px
+}
+
+.distance-options {
+    display: flex;
+    gap: 5px
+}
+
+.distance-options button {
+    border: 1px solid #c5cbbd;
+    border-radius: 4px;
+    min-width: 43px;
+    min-height: 36px;
+    padding: 8px
+}
+
+.distance-options button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink)
+}
+
+.distance-options button:hover {
+    border-color: var(--ink)
+}
+
+#distance small {
+    display: block;
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 7px;
+    letter-spacing: 0
+}
+
+@media(max-width:760px) {
+    #distance {
+        width: 100%
+    }
+
+    .distance-options button {
+        flex: 1;
+        min-width: 0;
+        min-height: 42px
+    }
+}
+
+.scene::before,
+.scene::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 0;
+    background: #17261f;
+    pointer-events: none;
+    transition: height .28s;
+    z-index: 1
+}
+
+.scene::before {
+    top: 0
+}
+
+.scene::after {
+    bottom: 0
+}
+
+.scene.cinematic::before,
+.scene.cinematic::after {
+    height: 19px
+}
+
+.scene.cinematic .callout {
+    top: auto;
+    bottom: 72px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    text-shadow: 0 1px 8px #f4f0d8
+}
+
+.scene.cinematic .callout strong {
+    font-size: 34px
+}
+
+.scene-top,
+.scene-bottom,
+#cine {
+    z-index: 2
+}
+
+#summary {
+    z-index: 3
+}
+
+.power>div {
+    position: relative
+}
+
+.power>div::after {
+    content: '';
+    position: absolute;
+    left: var(--min-draw, 0%);
+    top: -3px;
+    height: 9px;
+    width: 1px;
+    background: #fff2ba
+}
+
+.power span #drawTitle {
+    display: inline;
+    margin: 0;
+    font-size: 7px;
+    letter-spacing: .5px
+}
+
+#windResult {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 51px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    background: #f4f3ebe6;
+    border: 1px solid #c5cbbd;
+    border-radius: 4px;
+    padding: 9px 12px;
+    z-index: 2;
+    pointer-events: none
+}
+
+@media(max-width:760px) {
+    #windResult {
+        font-size: 8px;
+        top: 54px;
+        padding: 7px
+    }
+}
