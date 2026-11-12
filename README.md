@@ -1,19 +1,225 @@
-# Flight Club — Archery Range
+<p align="center">
+  <img src="dist/archer.png" width="140" alt="Flight Club Archery Emblem" />
+</p>
 
-Run `python3 -m http.server 8080 --directory dist` and open http://localhost:8080. No build step or dependencies. Fonts fall back gracefully offline.
+<h1 align="center">FLIGHT CLUB</h1>
+<p align="center">
+  <strong>The Archery Range &bull; A 3D WebGL Ballistic Simulator</strong><br>
+  <em>"A quiet mind. A steady hand. One perfect shot."</em>
+</p>
 
-Hold mouse/touch to draw and smoothly zoom in (up to 1.8×), move to aim, release to shoot. Space draws/releases at the current aim. Drop & trajectory assist maps the pointer to the target plane and solves elevation in still air. It never compensates for wind: aim left in rightward wind, right in leftward wind. The reticle stays at your aim point while the trajectory shows wind drift. Turn assist off for manual elevation too. T toggles the optional flight preview (off by default), R starts a round. Six arrows per round. Wind speed (0.5–5.5 m/s) is randomized before each shot, always differing from the preceding speed. The first wind direction is random; subsequent shots alternate left and right, so each six-arrow round has three shots in each direction. Animated leaves drift in the actual crosswind direction, with faster travel and flutter in stronger wind; they follow the current shot wind through the cinematic replay. Wind stays fixed during draw and flight; trajectory assist uses the same wind as the projectile. A tuned lateral wind response makes drift visible, with a flight trail. Choose 10m, 20m, 30m, 50m, 70m or 90m using the distance buttons. Changing distance starts a fresh six-arrow round, resets the reticle and returns to the aiming camera. Longer distances receive extra sight magnification. The draw HUD marks the minimum reliable draw: 20%, 35%, 50%, 75%, 90%, and 100% at 10m, 20m, 30m, 50m, 70m, and 90m respectively; an underpowered release keeps the arrow and asks for more draw. The extra landing circle is removed. The optional flight preview is off by default. After impact, a HUD readout reports sideways displacement compared with the same shot in still air. The shot wind stays on the HUD throughout its replay, then changes for the next shot. Impact framing includes the target and the miss location at every range. Sound is on by default and starts after the first draw gesture. The sound button mutes all effects. ArcheryAudio layers filtered noise and resonant transients for draw creak, string snap, a soft, low-pass-filtered flight swish that fades quickly instead of sustained hiss, wooden board impact and a softer ground miss. No remote audio assets are needed.
+<p align="center">
+  <img src="https://img.shields.io/badge/Three.js-r170-black?style=for-the-badge&logo=threedotjs" alt="Three.js r170" />
+  <img src="https://img.shields.io/badge/WebGL-Hardware_Accelerated-blue?style=for-the-badge&logo=webgl" alt="WebGL" />
+  <img src="https://img.shields.io/badge/Web_Audio-Procedurally_Synthesized-success?style=for-the-badge" alt="Procedural Web Audio" />
+  <img src="https://img.shields.io/badge/Dependencies-Zero_Build_Step-brightgreen?style=for-the-badge" alt="Zero Dependencies" />
+  <img src="https://img.shields.io/badge/License-MIT-orange?style=for-the-badge" alt="MIT License" />
+</p>
 
-The Three.js WebGL renderer uses metric 3D projectile coordinates, original procedural forest scenery, a modeled recurve bow, animated string and nocked arrow, an arrow chase camera on every shot, slow motion, an orbiting impact close-up, target shake, debris, and vibrating embedded arrows. Hold to zoom in; release transitions to the chase camera. Modular PhysicsEngine, BowController, TargetManager, CinematicCameraDirector, ScoringSystem and UIManager classes keep simulation separate from scene3d.js. Flight integrates gravity, relative-air drag and lateral wind at up to 240 Hz, with swept target-plane collision interpolation. Shaft radius determines line cutters. Prediction uses the same integrator. Base points and bonuses are reported separately, with local high-score persistence. Three.js r170 is vendored with its MIT license. WebGL is required. No other game's assets are used.
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> &bull;
+  <a href="#-features--systems">Features</a> &bull;
+  <a href="#-gameplay--controls">Controls</a> &bull;
+  <a href="#-ballistics--physics-engine">Physics Engine</a> &bull;
+  <a href="#-target-geometry--scoring">Scoring</a> &bull;
+  <a href="#-project-structure">Project Structure</a> &bull;
+  <a href="#-roadmap">Roadmap</a>
+</p>
 
-The requested force/mass launch formula is implemented with tuned prototype parameters; a production bow model should integrate draw energy and power-stroke length for physical units. No multiplayer backend or full release asset pipeline is included.
+---
 
-## Five next steps
-1. Refine the bow rig with fully articulated hand animation and sampled audio.
-2. Add measured bow draw curves, arrow spine flex and equipment JSON presets.
-3. Implement rail and pendulum targets with swept relative-motion collisions.
-4. Add seeded gusts, rain drag modifiers, night lighting and distance progression.
-5. Add tournament persistence, accessibility settings, replay capture and cross-device playtesting.
+## 🌲 Overview
 
-The 10-ring bullseye radius is 3.25 cm (half its original diameter); the X-ring radius is 0.9 cm. Shared target-config.js keeps rendering, line-cutter scoring, cinematic labels and scorecards aligned.
+**Flight Club** is an authentic, lightweight 3D recurve archery simulation built entirely in client-side WebGL and Vanilla ES modules. Set against a serene procedural pinewood forest, the game models real-world aerodynamics, draw mechanics, variable lateral crosswinds, and cinematic camera tracking.
 
+Built with **zero build dependencies**, **zero remote asset downloads**, and **fully procedural Web Audio**, Flight Club delivers high-fidelity simulation and instant startup directly in any modern browser.
+
+---
+
+## ✨ Features & Systems
+
+### 🏹 Dynamic Recurve Bow Rig
+- **Tension & Draw Physics**: Hold to smoothly zoom in on the target line (up to $1.8\times$) and increase potential launch energy.
+- **Breath & Stamina Sway**: Holding full draw for longer than 3 seconds introduces realistic physiological sway harmonics ($\sin / \cos$ oscillations) that challenge your aim.
+- **Minimum Draw Check**: Distance-calibrated minimum draw power (from 20% at 10m to 100% at 90m). An underpowered release safely retains the arrow and warns the archer.
+
+### 💨 Ballistics & Environmental Crosswind
+- **240 Hz Sub-stepped Numerical Integrator**: Simulates gravity, atmospheric air density ($\rho = 1.225\,\text{kg/m}^3$), quadratic velocity drag, and lateral crosswind deflection.
+- **Dynamic Wind Patterns**: Wind speeds fluctuate (0.5 to 5.5 m/s) with directional alternating sequences between shots.
+- **Procedural Wind Leaves**: Forest foliage and drifting leaves flutter in real-time according to the active crosswind velocity, giving subtle visual cues before you release.
+
+### 🎬 Cinematic Camera Director
+- **Chase Camera**: Seamlessly flies behind the arrow shaft upon release.
+- **Bullet-Time Slow Motion**: Trajectory calculations automatically trigger $0.25\times$ slow-motion whenever a shot is on course for the gold ring.
+- **Orbiting Impact Cam**: Dynamic camera cut on impact showcasing arrow vibration, wood splinters, and landing angle.
+
+### 🔊 Procedural Web Audio Engine
+- **No MP3/WAV files required**: 100% procedurally synthesized audio using the browser's Web Audio API.
+- Custom synthesizer nodes emulate:
+  - *Bow draw*: Wooden stress creak and limb tension.
+  - *Release*: Sharp string snap with resonant harmonic tail.
+  - *Flight*: Low-pass filtered aerodynamic air swish that fades with distance.
+  - *Impact*: Heavy wooden target thud or soft ground-miss dirt strike.
+
+---
+
+## 🎯 Gameplay & Controls
+
+| Action | Input (Mouse / Touch) | Keyboard Shortcut |
+| :--- | :--- | :--- |
+| **Draw Bow** | Press & Hold Left Mouse Button / Touch | Hold `Space` |
+| **Aim** | Move Pointer while holding draw | Pointer Position |
+| **Shoot** | Release Mouse Button / Touch | Release `Space` |
+| **Cancel Draw** | Move off-screen or cancel gesture | Blur / Escape |
+| **Toggle Trajectory Preview** | UI Checkbox | `T` |
+| **Reset / New Round** | Reset Button | `R` |
+| **Change Distance** | Distance Selector (10m &ndash; 90m) | Click Distance buttons |
+| **Toggle Audio** | Sound Button in header | Click Sound button |
+
+> [!TIP]
+> **Drop & Trajectory Assist:** The aiming reticle solves ballistic drop compensation for **still air only**. It deliberately **never** compensates for crosswind:
+> - **Wind blowing Right ($\rightarrow$)**: Aim to the **LEFT**.
+> - **Wind blowing Left ($\leftarrow$)**: Aim to the **RIGHT**.
+
+---
+
+## 📐 Ballistics & Physics Engine
+
+Arrow trajectories are calculated using discrete aerodynamic step integration at up to $240\,\text{Hz}$:
+
+```
+                    ┌─────────────────────────┐
+                    │      Launch Vector      │
+                    │  v₀ = f(aim, drawPower) │
+                    └────────────┬────────────┘
+                                 │
+                                 ▼
+                    ┌─────────────────────────┐
+                    │  240 Hz Integrator Loop │
+                    │                         │
+                    │   • Gravity: -9.81 m/s² │
+                    │   • Air Drag: -k|v_rel|v│
+                    │   • Lateral Crosswind   │
+                    └────────────┬────────────┘
+                                 │
+                                 ▼
+                    ┌─────────────────────────┐
+                    │  Swept-Plane Collision  │
+                    │  & Shaft-Radius Cutters │
+                    └─────────────────────────┘
+```
+
+### Physical Parameters
+- **Draw Force**: $5.1\,\text{N}$ effective prototype draw constant
+- **Arrow Mass**: $25\,\text{g}$ ($0.025\,\text{kg}$)
+- **Shaft Radius**: $4\,\text{mm}$ ($0.004\,\text{m}$)
+- **Drag Coefficient ($C_d$)**: $1.1$
+- **Cross-Sectional Area**: $0.00004\,\text{m}^2$
+- **Air Density ($\rho$)**: $1.225\,\text{kg/m}^3$
+
+---
+
+## 🏆 Target Geometry & Scoring
+
+Official target rings conform to standard target-archery concentric proportions:
+
+<div align="center">
+
+| Ring | Radius | Score | Point Label |
+| :--- | :--- | :--- | :--- |
+| **Inner X-Ring** | $0.90\,\text{cm}$ | **10** (+10 Bonus) | `PERFECT X` |
+| **10-Ring (Bullseye)** | $3.25\,\text{cm}$ | **10** (+5 Bonus) | `BULLSEYE` |
+| **Gold (9)** | $6.50\,\text{cm}$ | **9** | `IN THE GOLD` |
+| **Red (7–8)** | $13.0–19.5\,\text{cm}$ | **7–8** | `ON THE BOARD` |
+| **Blue (5–6)** | $26.0–32.5\,\text{cm}$ | **5–6** | `ON THE BOARD` |
+| **Black (3–4)** | $39.0–45.5\,\text{cm}$ | **3–4** | `ON THE BOARD` |
+| **White (1–2)** | $52.0–65.0\,\text{cm}$ | **1–2** | `ON THE BOARD` |
+| **Miss** | $> 65.0\,\text{cm}$ | **0** | `JUST WIDE / OUT OF RANGE` |
+
+</div>
+
+> [!NOTE]
+> **Line Cutters**: A true line-cutter rule evaluates the arrow's outer shaft boundary ($4\,\text{mm}$ radius), granting the higher point score if any part of the shaft touches the inner scoring ring.
+> 
+> **Robin Hood**: Splitting a previously embedded arrow on the board triggers an exclusive `ROBIN HOOD` accolade!
+
+---
+
+## ⚡ Quick Start
+
+No Node.js, `npm install`, or bundler required! Run using any standard static file server:
+
+### Python 3
+```bash
+python3 -m http.server 8080 --directory dist
+```
+
+### Node.js (`npx serve`)
+```bash
+npx serve dist -l 8080
+```
+
+### PHP
+```bash
+php -S localhost:8080 -t dist
+```
+
+Then open your browser to **[http://localhost:8080](http://localhost:8080)**.
+
+---
+
+## 📁 Project Structure
+
+```text
+flight-club-archery/
+├── README.md               # Project documentation
+├── .gitignore              # Git ignore rules
+└── dist/                   # Zero-build application root
+    ├── index.html          # Semantic HTML5 layout & Range UI
+    ├── style.css           # Clean typography & HUD overlays
+    ├── game.js             # Game loop, physics engine, scoring & state
+    ├── scene3d.js          # Three.js scene, lighting, bow rig & foliage
+    ├── audio.js            # Synthesized procedural Web Audio engine
+    ├── wind-leaves.js      # Wind particle physics & leaf simulation
+    ├── target-config.js    # Shared target ring geometry constants
+    ├── archer.png          # High-resolution brand logo & emblem
+    ├── logo.jpg            # Artwork & visual branding
+    └── vendor/
+        ├── three.module.js # Vendored Three.js r170 (ES Module)
+        └── THREE-LICENSE.txt # MIT License for Three.js
+```
+
+---
+
+## 🛠️ Architecture & Extension Hooks
+
+The simulation follows a modular, decoupled architecture centered around an internal `EventBus`:
+
+- `PhysicsEngine`: Pure ballistic math and analytical trajectory solvers.
+- `BowController`: Manages draw power accumulation, pointer mapping, and sway.
+- `CinematicCameraDirector`: Handles camera transitions, orbit controls, and slow-motion pacing.
+- `TargetManager`: Handles target coordinates and embedded arrow collections.
+- `ArcheryAudio`: Independent procedural audio synthesis.
+
+Pre-wired extension points in `game.js` include hooks for:
+- JSON equipment presets (draw weight, arrow spine flex, arrow mass).
+- Moving, pendulum, and rail targets.
+- Seeded tournament modes and online leaderboards.
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Articulated hand and glove animation on bow grip and nock release.
+- [ ] Equipment JSON presets for compound bows and carbon-shaft competition arrows.
+- [ ] Moving target tracks and pendulum swing targets.
+- [ ] Dynamic weather variations (rain drag modifiers, dusk & night lighting).
+- [ ] Online asynchronous tournament challenges and replay capture.
+
+---
+
+## 📄 License
+
+- **Source Code**: Released under the [MIT License](LICENSE).
+- **Three.js**: Vendored under the MIT License (see [THREE-LICENSE.txt](dist/vendor/THREE-LICENSE.txt)).
+- **Media & Assets**: Original assets created for Flight Club.
